@@ -17,6 +17,17 @@ const LoginPage = () => {
 
   const navigate = useNavigate();
 
+  const toastOptions = {
+    position: "top-right",
+    autoClose: 2000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: false,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,7 +46,7 @@ const LoginPage = () => {
       console.log(loggedIn);
 
       if (response.ok) {
-        toast.success("User Logged in Successfully");
+        toast.success("Login Successfull", toastOptions);
         dispatch(
           setLogin({
             user: loggedIn.user,

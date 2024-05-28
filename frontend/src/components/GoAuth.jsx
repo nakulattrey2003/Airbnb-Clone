@@ -13,6 +13,7 @@ export default function GoAuth() {
   const googleAuthHandler = async () => {
     try {
       const provider = new GoogleAuthProvider();
+      // console.log(provider);
       const auth = getAuth(app);
       const result = await signInWithPopup(auth, provider);
       console.log(result);

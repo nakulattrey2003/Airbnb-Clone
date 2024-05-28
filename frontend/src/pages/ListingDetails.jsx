@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "../styles/ListingDetails.scss";
 import { useNavigate, useParams } from "react-router-dom";
 import { facilities } from "../data";
+import {ToastContainer, toast} from "react-toastify";
 
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css";
@@ -67,6 +68,7 @@ const ListingDetails = () => {
     try {
 
       if (!customerId) {
+        toast.error("Please Login in First to Book properties");
         navigate("/login");
         return;
       }
@@ -188,6 +190,7 @@ const ListingDetails = () => {
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
 
       <Footer />

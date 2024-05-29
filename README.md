@@ -77,5 +77,5 @@ To use ShoesWala, follow these steps:
 Nakul Attrey
 
 ## Link to the app: 
-(Not yet- Working)
+(Working)
 Live Link 

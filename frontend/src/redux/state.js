@@ -33,6 +33,9 @@ export const userSlice = createSlice({
     setReservationList: (state, action) => {
       state.user.reservationList = action.payload;
     },
+    updateUserProfile: (state, action) => {
+      state.user = { ...state.user, ...action.payload };
+    },
   },
 });
 
@@ -44,5 +47,6 @@ export const {
   setWishList,
   setPropertyList,
   setReservationList,
+  updateUserProfile,
 } = userSlice.actions;
 export default userSlice.reducer;

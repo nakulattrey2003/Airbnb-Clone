@@ -74,47 +74,6 @@ const RegisterPage = () => {
     }
   };
 
-  // const handleGoogleAuth = async (e) => {
-  //   try {
-  //     const provider = new GoogleAuthProvider();
-  //     await signInWithPopup(auth, provider);
-  //     navigate("/");
-  //   } catch (error) {
-  //     console.error("Google authentication failed:", error);
-  //   }
-  // }
-
-  // const handleGoogleAuth = async (e) => {
-  //   try {
-  //     const provider = new GoogleAuthProvider();
-  //     const result = await signInWithPopup(auth, provider);
-  //     const { displayName, email } = result.user;
-
-  //     const response = await fetch(
-  //       "http://localhost:5000/auth/google-register",
-  //       {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         body: JSON.stringify({ displayName, email }),
-  //       }
-  //     );
-
-  //     if (response.ok) {
-  //       toast.success("User Registered Successfully");
-  //       console.log("User Registered Successfully");
-  //       navigate("/login");
-  //     } else {
-  //       console.log("User Already Exists");
-  //       toast.error("User Already Exists");
-  //     }
-  //   } catch (error) {
-  //     console.error("Google authentication failed:", error);
-  //   }
-  // };
-
-
   return (
     <div className="register">
       <img src="/assets/airbnbLogo.png" alt="" />

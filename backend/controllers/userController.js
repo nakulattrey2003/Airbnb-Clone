@@ -1,8 +1,52 @@
 const express = require("express");
+const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 
 const Booking = require("../models/bookingModel.js");
 const User = require("../models/userModel.js");
 const Listing = require("../models/listingModel.js");
+
+
+const updateUserController = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    let user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    /* Generate JWT token */
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+    const { name, password } = req.body;
+
+    const profileImage = req.file;
+
+    if (!profileImage) {
+      return res.status(400).send("No file uploaded");
+    }
+
+    let profileImagePath = profileImage.path;
+
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
+
+    if (name) user.name = name;
+    if (password) user.password = hashedPassword;
+    if (profileImagePath) user.profileImagePath = profileImagePath;
+
+    await user.save();
+
+    res.status(200).json({ message: "User updated successfully", user, token });
+  } catch (err) {
+    console.log(err);
+    res
+      .status(404)
+      .json({ message: "Can not find reservations!", error: err.message });
+  }
+};
 
 const getTripListController = async (req, res) => {
   try {
@@ -25,12 +69,14 @@ const addListingToWishlistController = async (req, res) => {
     const user = await User.findById(userId);
     const listing = await Listing.findById(listingId).populate("creator");
 
-    const favoriteListing = user.wishList.find(  // checking if the item is present in the wishlist
+    const favoriteListing = user.wishList.find(
+      // checking if the item is present in the wishlist
       (item) => item._id.toString() === listingId
     );
 
     if (favoriteListing) {
-      user.wishList = user.wishList.filter(    // if it is present then remove it from the list else add it to the wishlist
+      user.wishList = user.wishList.filter(
+        // if it is present then remove it from the list else add it to the wishlist
         (item) => item._id.toString() !== listingId
       );
       await user.save();
@@ -87,4 +133,5 @@ module.exports = {
   addListingToWishlistController,
   getPropertyListController,
   getReservationListController,
+  updateUserController,
 };

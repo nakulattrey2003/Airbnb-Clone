@@ -1,11 +1,15 @@
 import { categories } from "../data";
 import "../styles/Categories.scss"
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Categories = () => {
+
+  const username = useSelector((state) => state?.user?.name);
+
   return (
     <div className="categories">
-      <h1>Explore Top Categories</h1>
+      <h1>Top Categories Await, {username ? username : "Guest"}!</h1>
       <p>
         Explore our wide range of vacation rentals that cater to all types of
         travelers. Immerse yourself in the local culture, enjoy the comforts of

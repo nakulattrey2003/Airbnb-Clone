@@ -34,7 +34,7 @@ export const userSlice = createSlice({
       state.user.reservationList = action.payload;
     },
     updateUserProfile: (state, action) => {
-      state.user = { ...state.user, ...action.payload };
+      state.user = action.payload;
     },
   },
 });
